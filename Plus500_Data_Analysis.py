@@ -54,7 +54,10 @@ canvas.create_window((0, 0), window=frame, anchor="nw")
 
 
 
-data = data[1:1000]  # slice rows 1 to 2 (excluding the last index)
+#data = data[1:1000]  # slice rows 1 to 2 (excluding the last index)
+
+del data[0] #delete the first element.
+
 data = [row[16] for row in data]  # slice columns 1 to 2 for each row
 
 arr = np.array(data)
@@ -66,11 +69,11 @@ for val in arr_str:
     else:
         arr_float.append(0) # set empty values to 0
 arr_int = np.array(arr_float).reshape(arr.shape)
-print(arr_float)
+#print(arr_float)
 
 
 # create some data for the graph
-x = np.arange(1, 1000)
+x = np.arange(1, len(data)+1)
 y = arr_float
 
 # plot the data on the subplot
