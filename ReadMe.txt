@@ -1,1 +1,5 @@
-ReadMe.txt
+build using
+
+python setup.py build
+
+

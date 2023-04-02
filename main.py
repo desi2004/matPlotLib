@@ -3,6 +3,8 @@ import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits import  axes_grid1
 
 
 # read the data from the CSV file
@@ -77,16 +79,44 @@ x = np.arange(1, len(data)+1)
 y = arr_float
 
 # plot the data on the subplot
-ax.plot(x, y)
+
+# Create a plot
+fig, ax = plt.subplots()
+
+
+#plt.scatter(x, y, marker='.')  #'o': a circle '.': a point 's': a square '^': an upward-pointing triangle 'v': a downward-pointing triangle '*': a star 'x': a cross
+
+
+
+colors = np.array(y)  # Use y values as colors
+plt.scatter(x, y, c=colors, cmap='viridis')
+plt.colorbar()  # Add colorbar for reference
+plt.show()
+
+
+plt.show()
+
+
+#ax.plot(x, y)
+
+#ax.plot(x, y)
+#ax.autoscale()
+#ax.set_xlim(1,500)
+#ax.set_ylim(-250,250)
+
+
+#zoom_pan = axes_grid1.ZoomPan()
+#zoom_pan.zoomable(ax)
+
 
 # update the y-coordinates of the graph
 # ax.plot(x, y)
 
 # create a canvas widget to display the graph
-canvas = FigureCanvasTkAgg(fig, master=window)
+# canvas = FigureCanvasTkAgg(fig, master=window)
 
 # pack the canvas widget to the window
-canvas.get_tk_widget().pack()
+# canvas.get_tk_widget().pack()
 
 # set the text of the label to
 
