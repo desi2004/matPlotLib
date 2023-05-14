@@ -6,9 +6,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import  axes_grid1
 
+Data_length=1000
+
+def find_positive_members(array):
+    positive_members = []
+    for member in array:
+        if isinstance(member, (int, float)) and member > 0:
+            positive_members.append(member)
+    return positive_members
+
+def find_negative_members(array):
+    positive_members = []
+    for member in array:
+        if isinstance(member, (int, float)) and member < 0:
+            positive_members.append(member)
+    return positive_members
+
+def calculate_average(array):
+    total = sum(array)
+    average = total / len(array)
+    return average
 
 # read the data from the CSV file
-with open('C:/Users/huami/Dropbox/Trading Journal/Plus500/Real/Trading Record Analysis/Plus500Report_01-12-2008_01-04-2023.csv', 'r') as file:
+with open('C:/Users/huami/Dropbox/Trading Journal/Plus500/Real/Trading Record Analysis/Plus500Report.csv', 'r') as file:
     #reader = csv.reader(file)
     reader = csv.reader(file, delimiter=',')
     # Initialize an empty array to store the data
@@ -62,6 +82,8 @@ del data[0] #delete the first element.
 
 data = [row[16] for row in data]  # slice columns 1 to 2 for each row
 
+
+
 arr = np.array(data)
 arr_str = arr.flatten() # flatten the 2D array to 1D
 arr_float = []
@@ -70,8 +92,23 @@ for val in arr_str:
         arr_float.append(float(val)) # convert non-empty values to int
     else:
         arr_float.append(0) # set empty values to 0
+
 arr_int = np.array(arr_float).reshape(arr.shape)
-#print(arr_float)
+
+
+First_600=arr_float[:600]
+positive_nums = find_positive_members(First_600)
+negative_nums = find_negative_members(First_600)
+
+win=len(positive_nums)
+total_trades=len(data)
+win_rate=win/600
+
+Average_Win=calculate_average(positive_nums)
+Average_Loss=calculate_average(negative_nums)
+print("Win Rate=", win_rate)
+print("Average Win=", Average_Win)
+print("Average Loss", Average_Loss)
 
 
 # create some data for the graph
@@ -95,6 +132,8 @@ plt.show()
 
 
 plt.show()
+
+
 
 
 #ax.plot(x, y)
@@ -131,6 +170,6 @@ plt.show()
 #frame.bind("<Configure>", lambda event: canvas.configure(scrollregion=canvas.bbox("all")))
 
 # start the main event loop
-window.mainloop()
 
+window.mainloop()
 
