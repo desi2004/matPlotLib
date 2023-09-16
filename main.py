@@ -102,16 +102,21 @@ negative_nums = find_negative_members(First_600)
 
 win=len(positive_nums)
 total_trades=len(data)
-win_rate=win/600
 
+win_rate=win/600
 Average_Win=calculate_average(positive_nums)
 Average_Loss=calculate_average(negative_nums)
+Positive_Expectation=win_rate*Average_Win+(1-win_rate)*Average_Loss
+
+
 print("Win Rate=", win_rate)
 print("Average Win=", Average_Win)
 print("Average Loss", Average_Loss)
+print("Positive Expectation",Positive_Expectation)
 
 
 # create some data for the graph
+
 x = np.arange(1, len(data)+1)
 y = arr_float
 
