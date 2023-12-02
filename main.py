@@ -1,5 +1,7 @@
 import csv
 import tkinter as tk
+from tkinter import filedialog #TRAD-46
+import pandas as pd #TRAD-46
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import numpy as np
@@ -7,6 +9,25 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import  axes_grid1
 
 Data_length=1000
+
+#TRAD-46
+
+def open_csv_file():
+    file_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
+    if file_path:
+        # Read the CSV file using pandas or perform other actions
+        df = pd.read_csv(file_path)
+        print("CSV file opened successfully:")
+        print(df)
+
+# Create a Tkinter window
+root = tk.Tk()
+root.title("Open CSV File")
+
+# Create a button to trigger the file dialog
+open_button = tk.Button(root, text="Open CSV File", command=open_csv_file)
+open_button.pack(pady=20)
+
 
 def find_positive_members(array):
     positive_members = []
@@ -29,6 +50,8 @@ def calculate_average(array):
 
 # read the data from the CSV file
 with open('C:/Users/huami/Dropbox/Trading Journal/Plus500/Real/Trading Record Analysis/Plus500Report.csv', 'r') as file:
+
+
     #reader = csv.reader(file)
     reader = csv.reader(file, delimiter=',')
     # Initialize an empty array to store the data
@@ -80,7 +103,7 @@ canvas.create_window((0, 0), window=frame, anchor="nw")
 
 del data[0] #delete the first element.
 
-data = [row[16] for row in data]  # slice columns 1 to 2 for each row
+data = [row[8] for row in data]  # slice columns 1 to 2 for each row
 
 
 
